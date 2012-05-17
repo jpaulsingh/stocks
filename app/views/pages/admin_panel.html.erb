@@ -1,0 +1,11 @@
+<h1>Admin panel page</h1> 
+<p>Stocks Tranactions</p>
+
+<%= form_for(@stock) do |f| %>
+  <%= f.label :stock_symbol %>
+  <%= f.text_field :stock_symbol %>
+ # <%= f.label :stock_name %>
+ # <%= f.text_field :stock_name %>   
+  <%= f.submit "Add" %>                                                                                           
+  <% end %> 
+

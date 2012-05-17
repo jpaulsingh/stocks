@@ -1,0 +1,9 @@
+<h1>Pages#index</h1>
+<p>Find me in app/views/pages/index.html.erb</p>
+
+<%= current_user.email if current_user %>
+
+#<%= link_to "Admin Panel", stocks_path %>
+<%= link_to "Stocks", stocks_path %>
+
+

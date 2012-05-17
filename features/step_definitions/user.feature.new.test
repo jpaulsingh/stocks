@@ -1,0 +1,6 @@
+Given /^I am on the stocks index page$/ do
+  visit '/users/sign_in'
+end
+
+
+

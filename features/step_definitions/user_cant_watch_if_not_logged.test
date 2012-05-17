@@ -1,0 +1,20 @@
+When /^I follow "(.*?)"$/ do |foo|
+  click_on(foo)
+end
+
+Then /^I should see "(.*?)"$/ do |stock|
+  page.should have_content(stock)
+end
+
+Given /^I am not logged in$/ do
+@user = User.create(email: "test@example.com", password: "password", password_confirmation: "password")
+visit '/users/sign_in'
+fill_in("Email", :with => "")
+fill_in("Password", :with => "")
+click_button('Sign in')
+assert page.has_content?('Please sign in')
+end
+
+
+
+

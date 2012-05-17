@@ -1,0 +1,15 @@
+<h1>Dividend Reporter</h1>
+<p>
+
+
+  <% @userstocks.each do |s| %>
+  <%= link_to s.stock_symbol.upcase, userstock_path(s) %> 
+  <%= s.stock_name %>
+  <%= s.dividend %>
+  <%= s.ex_date %>
+  <%= s.dividend_per_share %>
+  <%= s.last_price %>
+  <%= s.collected_at %>
+  </p>
+  <% end %>
+  <%= link_to "Add new stock",  new_userstock_path %>

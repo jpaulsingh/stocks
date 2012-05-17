@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stocks</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <% if notice %>
+    <p class="alert-message info"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+    <p class="alert-message warning"><%= alert %></p>
+  <% end %>
+
+   <% if user_signed_in? %>
+  <li>
+  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+  <%= link_to "Stocks List", stocks_path %>
+    </li>
+  <% else %>
+
+    <li>
+    <%= link_to('Login', new_user_session_path)  %>  
+
+<%= yield %>
+ <% end %>
+</body>
+</html>

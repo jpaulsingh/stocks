@@ -1,0 +1,7 @@
+<h1>User's Page</h1>
+<% if user_signed_in? && !@user.admin? %>
+  <%= @user.email %>
+  <% link_to "My Watchlist" stocks_path %>
+<% end  %>
+
+

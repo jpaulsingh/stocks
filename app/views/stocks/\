@@ -1,0 +1,11 @@
+<h1>Stock Details</h1>
+<p>
+<%= @stock.stock_symbol %> <br
+ Stock Information : <%= @stock.stock_name %>
+</p>
+<% if current_user.email == "admin@example.com" %>
+  <%= link_to "remove", @stock, :confirm => "Are you sure ?", :method => :delete %>
+<% else %>
+  Added to your list
+ <% end %>
+

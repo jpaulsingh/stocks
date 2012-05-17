@@ -1,0 +1,8 @@
+class Userlist < ActiveRecord::Base
+ attr_accessible :stock_id, :user_id
+ belongs_to :user_id, :class_name => "User"
+ belongs_to :stock_id, :class_name => "Stock"
+ validates :user_id, :presence => true
+ validates :stock_id, :presence => true
+
+end

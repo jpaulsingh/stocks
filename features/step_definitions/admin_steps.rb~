@@ -1,0 +1,32 @@
+Given /^I am logged in as an administrator$/ do
+  @user = User.create(email: "admin@example.com", password: "password", password_confirmation: "password")
+  @user.admin = true
+  @user.save
+  visit '/users/sign_in'
+  fill_in("Email", :with => "admin@example.com")
+  fill_in("Password", :with => "password")
+  click_button('Sign in')
+  assert page.has_content?('Signed in successfully')
+end
+
+Given /^I am on the stocks page$/ do
+  visit(stocks_path)
+  current_path == (stocks_path)
+end
+
+#When /^I fill in "(.*?)" with "(.*?)"$/ do |symbol,name|
+ # fill_in("Add Stock", :with => symbol)
+  #click_button('Add Stock')
+  #fill_in("Stock Name" , :with => name)
+#end
+
+#When /^I press "(.*?)"$/ do |button|
+ #@user.admin = true                                                                                                    
+# current_path == admin_panel_path 
+ #choose_button(button)
+#end
+
+#Then /^I should see "(.*?)"$/ do |message|
+ # rem_message = message
+#end
+

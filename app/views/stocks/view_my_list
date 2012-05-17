@@ -1,0 +1,4 @@
+<% @stock.each do |s| %>
+<%= s.stock_symbol %>
+<%= s.stock.name %>
+<% end %>
