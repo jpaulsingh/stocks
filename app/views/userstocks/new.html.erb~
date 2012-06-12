@@ -1,9 +1,0 @@
-<h1>New Stock</h1>
-
-<%= form_for(@userstocks) do |f| %>
-<%= f.label      :stock_symbol %><br>
-<%= f.text_field :stock_symbol %> <br>
-<%= f.submit "Add  stock" %>
-<% end %> 
-<% end %> 
-

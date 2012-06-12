@@ -1,7 +1,0 @@
-Given /^there is a stock with company_name: "(.*?)"$/ do |company_name|
-  visit '/users/sign_in'
-  assert page.has_content? (company_name)
-end
-
-
-
