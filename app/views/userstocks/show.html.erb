@@ -1,8 +1,8 @@
-<h1>Stock Details</h1>                                                                                                                   
- <p>
- <%= @userstocks.stock_symbol %><br>
- Stock Information : <%= @userstocks.stock_name %>
- </p>
- <%= link_to "remove", @userstocks, :confirm => "Are you sure ?", :method => :delete %>
-
+ <h1>Stock Details</h1>
+  <p>
+  <%= @stock.stock_symbol %><br> 
+  Stock Information : <%= @stock.stock_name %>
+  Stock Bid : <%=@stock.dividend_per_share %>
+  Stock Last Trade: <%= @stock.last_price %>
+  Last Update : <%= @stock.collected_at %>
 

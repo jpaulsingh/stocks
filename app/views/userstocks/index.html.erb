@@ -1,15 +1,29 @@
-<h1>Dividend Reporter</h1>
+<h1> My Dividend Reporter</h1>
 <p>
-
-
-  <% @userstocks.each do |s| %>
-  <%= link_to s.stock_symbol.upcase, userstock_path(s) %> 
-  <%= s.stock_name %>
-  <%= s.dividend %>
-  <%= s.ex_date %>
-  <%= s.dividend_per_share %>
-  <%= s.last_price %>
-  <%= s.collected_at %>
-  </p>
-  <% end %>
-  <%= link_to "Add new stock",  new_userstock_path %>
+<%= will_paginate %>
+ <table border=3>
+ <tr>
+ <th>Symbol</th>
+ <th>Name</th>
+ <th>Bid</th>
+ <th>Last Trade</th>
+ <th>Collected at</th>
+ <th>Action</th>
+ </tr>
+ <% if @userstocks %>
+      <% @userstocks.each do |st| %>
+     <tr>                                                                                                                       
+     <td><%= link_to st.stock_symbol.upcase, stock_path(st) %></td> 
+     <td><%= st.stock_name %></td>
+     <td><%= st.dividend_per_share %></td>
+     <td><%= st.last_price %></td>
+     <td><%= st.collected_at %></td>
+     <td><%= link_to "remove", delete_stock_path(:stock => st.id), :confirm => "Are you sure ?", :method => :delete %></td>
+     <% end %>
+</tr>
+ <% end %>
+ <p> 
+ <% if @userstocks.any? %>
+     <%= link_to "Update", :controller => :userstocks, :action => :update_my_stocks %>
+ <% end %>
+ </p>

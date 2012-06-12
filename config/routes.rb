@@ -5,7 +5,9 @@ Stocks::Application.routes.draw do
   resources :stocks
   resources :userstocks
   match "update_stocks" => "stocks#update_stocks"
-  match "watch_stock" => "user_lists#watch_stock"
+  match "watch_stock" => "userstocks#watch_stock"
+  match "update_my_stocks" => "userstocks#update_my_stocks"
+  match "delete_stock" => "userstocks#delete_stock"
   match "Help" => 'pages#help'
 #  match "admin_panel" => "pages#admin", :as => :admin_panel
   #root to: 'pages#stocks'

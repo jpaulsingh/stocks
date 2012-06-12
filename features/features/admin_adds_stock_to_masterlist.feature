@@ -6,6 +6,5 @@ Feature: Admin adds a stock
   Scenario: Admin adds a stock to masterlist
     Given I am logged in as an administrator
     Given I am on the stocks page
-    When I fill in "Add stock" with "GOOG"
-    And I press "Add stock"
-    Then I should see "Google Inc."
+    When I fill in the required information and press Add stock
+    Then I will see "Google Inc"

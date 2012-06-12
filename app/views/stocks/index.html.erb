@@ -1,23 +1,37 @@
 <h1>Dividend Reporter</h1>
 <p>
+<%= will_paginate %>
+  <table border=3>
+    <tr>
+    <th>Symbol</th>
+    <th>Name</th>
+    <th>Bid</th>
+    <th>Last Trade</th>
+    <th>Collected at</th>
+    <th>Action</th>
+    </tr>
+ <% if @stocks %>
+     <% @stocks.each do |st| %>
+  <tr>  
+     <td><%= link_to st.stock_symbol.upcase, stock_path(st) %></td> 
+     <td><%= st.stock_name %></td>
+     <td><%= st.dividend_per_share %></td>
+     <td><%= st.last_price %></td>
+     <td><%= st.collected_at %></td>
+         <% if !current_user.admin %>
+           <td> <%= link_to "Watch", watch_stock_path(:stock_id => st.id) %></td>
+           <% else %> 
+           <td><%= link_to "remove", st, :confirm => "Are you sure ?", :method => :delete %></td> 
+         <% end %>
+  </tr>
+  <% end %> 
 
-
-  <% if @stocks %>
-    <% @stocks.each do |st| %>
-        <%= link_to st.stock_symbol.upcase, stock_path(st) %> 
-      <%= st.stock_name %>
-      <%= st.dividend %>
-      <%= st.ex_date %>
-      <%= st.dividend_per_share %>
-      <%= st.last_price %>
-      <%= st.collected_at %>
-      
-      <%= link_to "Watch", watch_stock_path(:stock_id => st.id) %>
+<% will_paginate %>
 </p>
-    <% end %>
-  <% end %>
-<% if current_user.email == "admin@example.com" %>
-<%= link_to "Update all quotes", update_stocks_path %>
-<%= link_to "New Stock", new_stock_path %>
-<% end %>
-
+<p>
+   <% if current_user && current_user.admin? %>
+      <%= link_to "Update all quotes", update_stocks_path %>
+      <%= link_to "New Stock", new_stock_path %>
+   <% end %> 
+ <% end %>
+</p>

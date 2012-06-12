@@ -6,7 +6,8 @@ gem 'rails', '3.2.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-
+gem 'will_paginate', '~> 3.0.pre2'
+gem 'jquery-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -39,7 +40,10 @@ gem 'jquery-rails'
 group :test do
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
+  gem 'launchy'
+  gem 'gherkin'
   gem 'ruby-debug19'
+  gem 'rspec-rails', '~>2.6.1'
 end
 gem 'devise'
 gem 'yahoofinance'

@@ -7,4 +7,5 @@ class Stock < ActiveRecord::Base
   validates :stock_symbol, :stock_name,   :uniqueness => true
   has_many  :users, :through => :userlists
   has_many :userlists
+
 end

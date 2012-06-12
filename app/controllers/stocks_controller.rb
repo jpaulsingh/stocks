@@ -1,16 +1,9 @@
 class StocksController < ApplicationController
-#  before_filter :check_admin, :only => [:new, :create]
-
-#  def check_admin
- #   if current_user && current_user.admin?
-  #    return true 
-   # else
-    #  redirect_to new_user_session_path
-    #end
- # end
-
+  
+  
   def index
     @stocks = Stock.all
+    @stocks = Stock.paginate :page => params[:page], :per_page => 20
   end 
 
   def show
@@ -22,9 +15,9 @@ class StocksController < ApplicationController
   end
 
   def create
-  quote_attrs = YahooFinance::get_standard_quotes(params["stock"]["stock_symbol"])
-  quote = quote_attrs.first[1]
-  attrs = {
+    quote_attrs = YahooFinance::get_standard_quotes(params["stock"]["stock_symbol"])
+    quote = quote_attrs.first[1]
+    attrs = {
       :stock_symbol => quote.symbol,  
       :stock_name => quote.name,  
       :dividend => quote.bid,  
@@ -33,49 +26,52 @@ class StocksController < ApplicationController
       :last_price => quote.lastTrade,
       :collected_at => quote.time}
 
-  @stock = Stock.new(attrs)
-  @stock.save
+    @stock = Stock.new(attrs)
+    @stock.save
     if @stock.save 
-      flash[:notice] = "Sucess"
-      redirect_to stocks_path    #index page 
+       flash[:notice] = "Sucess"
+       redirect_to stocks_path     
     else
-      flash[:notice] = "Failure" 
-      render 'new'
+       flash[:notice] = "Failure" 
+       render 'new'
     end
   end
   
   
   def update_stocks
-    #quote_type = YahooFinance::StandardQuote
     current_stocks = Stock.all
     quote_symbols = []
     current_stocks.each do |stock|
-      quote_symbols.push(stock.stock_symbol)
+    quote_symbols.push(stock.stock_symbol)
     end
     
-    #quotes =  YahooFinance::get_quotes( quote_type, quote_symbols ) do |qt| 
     quotes = YahooFinance::get_standard_quotes( quote_symbols.join(","))
     @stocks = []
     quotes.each do |qt|
-      attr = {
-        :stock_symbol => qt[1].symbol,  
-        :dividend => qt[1].bid,  
-        :ex_date =>  qt[1].ask,
-        :dividend_per_share => qt[1].open,
-        :last_price => qt[1].lastTrade,
-        :collected_at => qt[1].time}
+       attr = {
+         :stock_symbol => qt[1].symbol,  
+         :dividend => qt[1].bid,  
+         :ex_date =>  qt[1].ask,
+         :dividend_per_share => qt[1].open,
+         :last_price => qt[1].lastTrade,
+         :collected_at => qt[1].time}
         
-        stock = Stock.find_by_stock_symbol(qt[1].symbol)
-         stock.update_attributes(attr)
-        @stocks.push(stock)
-     end
-     redirect_to '/'
+      stock = Stock.find_by_stock_symbol(qt[1].symbol)
+      stock.update_attributes(attr)
+      @stocks.push(stock)
+      flash[:notice] = "All stocks updated"
+      end
+      redirect_to stocks_path
   end
 
   def destroy
-    @stock = Stock.find(params[:id])
-    @stock.destroy
-   flash[:notice] = "Stock successfully removed" 
-    redirect_to stocks_path 
+     @stock = Stock.find(params[:id])
+     @stock.destroy
+     flash[:notice] = "Stock successfully removed" 
+     redirect_to stocks_path 
   end
+
+
 end
+
+

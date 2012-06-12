@@ -3,16 +3,18 @@
 <p>Stocks Tranactions</p>
 
 <%= form_for(@stock) do |f| %>
-  <% if @stock.errors.any? %>
-    <h2>Errors<h2>
-        <u1>
-
-        </u1>
+   <% if @stock.errors.any? %>
+      <h2>Errors<h2>
+      <u1>
+      <% @stock.errors.full_messages.each do |msg| %>
+         <l1><%= msg %><l1>
       <% end %> 
-  <%= f.label      :stock_symbol %><br>
-  <%= f.text_field :stock_symbol %> <br>
+      </u1>
+   <% end %> 
+<%= f.label      :stock_symbol %><br>
+<%= f.text_field :stock_symbol %> <br>
 
-   <%= f.submit "Add  stock" %>
-   <%= link_to "Details", stocks_path %> 
-  <% end %> 
+<%= f.submit "Add stock" %>
+<%= link_to "Details", stocks_path %> 
+<% end %> 
 
